@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import './App.css';
 import TodoList from './components/todo_list.jsx';
-import FilterButton from "./components/filter_button.jsx";
+// import FilterButton from "./components/filter_button.jsx";
 import TaskForm from "./components/task_form.jsx";
 import { nanoid } from "nanoid";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = props => {
   const { taskData } = props;
@@ -49,11 +51,9 @@ const App = props => {
   return (
     <div className="todoapp stack-large">
       <TaskForm createTask={createTask} />
-      <div className="filters btn-group stack-exception">
+      {/* <div className="filters btn-group stack-exception">
         <FilterButton />
-        <FilterButton />
-        <FilterButton />
-      </div>
+      </div> */}
       <h2 id="list-heading">
         {tasks.length} {tasksFormattedNoun} remaining
       </h2>
