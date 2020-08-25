@@ -19,6 +19,8 @@ const TodoListItem = (props) => {
     setShowEditModal(false);
   }
 
+  console.log(task);
+
   return (
     <li
       className="todo stack-small">
@@ -35,9 +37,15 @@ const TodoListItem = (props) => {
           defaultChecked={task.isCompleted} 
           onChange={() => toggleCompleted(taskId)}
         />
-        <label className="todo-name" htmlFor="todo-0">
+        <h4 className="todo-name">
           {taskName}
-        </label>
+        </h4>
+        <h4 className="todo-description">
+          {task.description}
+        </h4>
+        <h4 className="todo-due-date">
+          {task.dueDate.toString()}
+        </h4>
       </div>
       <div className="btn-group">
         <button 

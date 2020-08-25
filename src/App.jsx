@@ -23,9 +23,11 @@ const App = props => {
     setTasks(updatedTasks);
   };
   
-  const createTask = name => {
+  const createTask = (name, description, dueDate) => {
     const newTask = { 
       name, 
+      description,
+      dueDate,
       id: `task=${nanoid()}`, 
       isCompleted: false, 
     };
@@ -50,7 +52,7 @@ const App = props => {
 
   return (
     <div className="todoapp stack-large">
-      <TaskForm createTask={createTask} />
+      <TaskForm onSubmit={createTask} />
       {/* <div className="filters btn-group stack-exception">
         <FilterButton />
       </div> */}

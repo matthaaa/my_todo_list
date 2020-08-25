@@ -5,9 +5,9 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 const TASK_DATA = [
-  { id: "todo-0", name: "Eat", isCompleted: true },
-  { id: "todo-1", name: "Sleep", isCompleted: false },
-  { id: "todo-2", name: "Repeat", isCompleted: false }
+  { id: "todo-0", name: "Eat", isCompleted: true, description: '', dueDate: new Date()},
+  { id: "todo-1", name: "Sleep", isCompleted: false, description: '', dueDate: new Date()},
+  { id: "todo-2", name: "Repeat", isCompleted: false, description: '', dueDate: new Date()},
 ];
 
 ReactDOM.render(
