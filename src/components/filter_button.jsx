@@ -1,6 +1,7 @@
 import React from "react";
 import Button from 'react-bootstrap/Button';
 
+// This component is currently not in use; use once filture feature is implemented.
 const FilterButton = (props) => {
   return (
     <Button variant="primary" onClick={props.handleFilter}>

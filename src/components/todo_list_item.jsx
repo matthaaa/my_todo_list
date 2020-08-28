@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import EditTaskForm from './edit_task_form.jsx';
 import { Colors } from '../colors.js';
+import { EditTaskModal, DeleteTaskModal } from './task_action_modals.jsx';
 import { dueToday, pastDue } from '../task_helpers.js';
 
 const TodoListItem = (props) => {
@@ -51,12 +50,18 @@ const TodoListItem = (props) => {
 
   return (
     <div style={styleByDueDate(styles.listItemContainer)}>
-      <EditModal 
+      <EditTaskModal 
         show={showEditModal} 
         onHide={() => setShowEditModal(false)}
         onSave={task => handleSave(task)}
         task={task}
       />
+      {/* <DeleteTaskModal 
+        show={showDeleteModal} 
+        onHide={() => setShowEditModal(false)}
+        onClick={task => handleSave(task)}
+        task={task}
+      /> */}
       <div style={styleByCompleted(styles.listItemContent)}>
         <div style={styleByDueDate(styles.listItemHeader)}>
           <input 
@@ -85,12 +90,12 @@ const TodoListItem = (props) => {
           </div>
         </div>
         <div style={styles.listItemBody}>
-          <div>
+          {task.description ? <div>
             <p style={styles.taskBodyLabel}>Description</p>
             <p className="todo-description">
               {task.description}
             </p>
-          </div>
+          </div> : null}
           <div>
             <span>Due: </span>
             <span className="todo-due-date">
@@ -103,39 +108,8 @@ const TodoListItem = (props) => {
   );
 }
 
-const EditModal = (props) => {
-  const { show, onHide, onSave, task } = props;
-  return (
-    <>
-      <Modal show={show} onHide={onHide} style={styles.modalContainer}>
-        <Modal.Header closeButton style={styles.modalHeader}>
-          <Modal.Title>Edit task</Modal.Title>
-        </Modal.Header>
-        <Modal.Body style={styles.modalBody}>
-          <EditTaskForm task={task} onHide={onHide} onSubmit={onSave} />
-        </Modal.Body>
-      </Modal>
-    </>
-  );
-}
-
 // TODO: Refactpr styles; add commonly used styles to generic Styles.js file.
 const styles = {
-  modalContainer: {
-    borderRadius: '.25rem',
-  },
-  
-  modalHeader: {
-    color: 'white',
-    fontFamily: 'Open Sans',
-    backgroundColor: Colors.blueMunsell,
-  },
-  
-  modalBody: {
-    backgroundColor: Colors.mintCream,
-    borderRadius: '0rem 0rem .25rem .25rem',
-  },
-
   listItemContainer: {
     display: 'flex',
     border: '1px solid',

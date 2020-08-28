@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import './App.css';
 import TodoList from './components/todo_list.jsx';
-import AddTaskForm from './components/add_task_form.jsx';
+import { AddTaskModal } from './components/task_action_modals.jsx';
 import { nanoid } from "nanoid";
 import { Colors } from './colors.js';
 import { dueToday, pastDue } from './task_helpers.js';
-import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -82,7 +81,7 @@ const App = props => {
 
   return (
     <div className="todoapp stack-large" style={styles.appContainer}>
-      <AddModal 
+      <AddTaskModal 
         show={showAddModal} 
         onHide={() => setShowAddModal(false)}
         onSave={createTask}
@@ -93,19 +92,19 @@ const App = props => {
           <div style={styles.taskStats}>
             <div style={styles.taskStat}>
               <h5 style={styles.taskStatNumber}>
-                {completedTasks.length} / {tasks.length} 
+                {completedTasks.length}/{tasks.length} 
               </h5>
-              <h4 id="list-heading">
+              <p>
                 {tasksFormattedNoun(tasks.length)} completed
-              </h4>
+              </p>
             </div>
             <div style={styles.taskStat}>
               <h5 style={styles.taskStatNumber}>
                 {dueTodayTasks.length} 
               </h5>
-              <h4 id="list-heading">
+              <p>
                 {tasksFormattedNoun(dueTodayTasks.length)} due today
-              </h4>
+              </p>
             </div>
             <div style={styles.lastTaskStat}>
               {
@@ -117,9 +116,9 @@ const App = props => {
               <h5 style={{...styles.taskStatNumber, ...{color: pastDueCount > 0 ? Colors.middleRed : Colors.blueMunsell}}}>
                 {pastDueCount} 
               </h5>
-              <h4 id="list-heading">
+              <p>
                 {tasksFormattedNoun(pastDueCount)} past due
-              </h4>
+              </p>
             </div>
           </div>
           <Button 
@@ -140,42 +139,11 @@ const App = props => {
   );
 }
 
-const AddModal = (props) => {
-  const { show, onHide, onSave } = props;
-  return (
-    <>
-      <Modal show={show} onHide={onHide} style={styles.modalContainer}>
-        <Modal.Header closeButton style={styles.modalHeader}>
-          <Modal.Title>New task</Modal.Title>
-        </Modal.Header>
-        <Modal.Body style={styles.modalBody}>
-          <AddTaskForm onSubmit={onSave} />
-        </Modal.Body>
-      </Modal>
-    </>
-  );
-}
-
 const styles = {
   appContainer: {
     padding: '3rem',
     height: '100vh',
     backgroundColor: Colors.powderBlue,
-  },
-
-  modalContainer: {
-    borderRadius: '.25rem',
-  },
-  
-  modalHeader: {
-    color: 'white',
-    fontFamily: 'Open Sans',
-    backgroundColor: Colors.blueMunsell,
-  },
-  
-  modalBody: {
-    backgroundColor: Colors.mintCream,
-    borderRadius: '0rem 0rem .25rem .25rem',
   },
 
   welcomeContainer: {
@@ -206,8 +174,8 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    marginRight: '2rem',
-    paddingRight: '2rem',
+    marginRight: '1.5rem',
+    paddingRight: '1.5rem',
     borderRight: '1px solid',
   },
   

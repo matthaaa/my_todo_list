@@ -25,7 +25,6 @@ const TaskForm = (props) => {
           Description
         </Form.Label>
         <Form.Control
-          required
           type="text"
           value={formTask.description}
           onChange={e => onUpdateTask('description', e.target.value)}
