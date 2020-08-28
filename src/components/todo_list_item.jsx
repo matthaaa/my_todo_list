@@ -71,10 +71,10 @@ const TodoListItem = (props) => {
               {taskName} {dueLabel()}
             </h5>
             <div style={styles.actionButtons}>
-              <Button 
+              {!task.isCompleted && <Button 
                 onClick={() => setShowEditModal(true)}>
                 Edit
-              </Button>
+              </Button>}
               <Button 
                 variant="danger"
                 onClick={() => deleteTask(taskId)}
@@ -105,14 +105,13 @@ const TodoListItem = (props) => {
 
 const EditModal = (props) => {
   const { show, onHide, onSave, task } = props;
-  const { modalHeader } = styles.modal;
   return (
     <>
-      <Modal show={show} onHide={onHide}>
-        <Modal.Header closeButton style={modalHeader}>
+      <Modal show={show} onHide={onHide} style={styles.modalContainer}>
+        <Modal.Header closeButton style={styles.modalHeader}>
           <Modal.Title>Edit task</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body style={styles.modalBody}>
           <EditTaskForm task={task} onHide={onHide} onSubmit={onSave} />
         </Modal.Body>
       </Modal>
@@ -122,15 +121,23 @@ const EditModal = (props) => {
 
 // TODO: Refactpr styles; add commonly used styles to generic Styles.js file.
 const styles = {
-  modal: {
-    modalHeader: {
-      color: 'white',
-      fontFamily: 'Open Sans',
-      backgroundColor: Colors.blueMunsell,
-    },
+  modalContainer: {
+    borderRadius: '.25rem',
+  },
+  
+  modalHeader: {
+    color: 'white',
+    fontFamily: 'Open Sans',
+    backgroundColor: Colors.blueMunsell,
+  },
+  
+  modalBody: {
+    backgroundColor: Colors.mintCream,
+    borderRadius: '0rem 0rem .25rem .25rem',
   },
 
   listItemContainer: {
+    display: 'flex',
     border: '1px solid',
     borderColor: Colors.blueMunsell,
     borderRadius: '.25rem',

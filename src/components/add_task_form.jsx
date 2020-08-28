@@ -28,9 +28,6 @@ const AddTaskForm = (props) => {
 
   return (
     <Form style={styles.formContainer} onSubmit={handleSubmit}>
-      <div style={styles.formHeader}>
-        <h4>New task</h4>
-      </div>
       <TaskForm formTask={updatedTask} onUpdateTask={handleUpdateTaskInput} />
       <Button variant="primary" type="submit" className="btn btn__primary btn__lg">
         {'Add task'}
@@ -45,19 +42,7 @@ AddTaskForm.propTypes = {
 
 const styles = {
   formContainer: {
-    marginLeft: `20px`,
-    padding: '20px',
-    border: '1px solid',
     borderRadius: '.25rem',
-    height: '25rem',
-    borderColor: Colors.blueMunsell,
-    backgroundColor: Colors.mintCream,
-  },
-
-  formHeader: {
-    borderBottom: '1px solid',
-    borderColor: Colors.blueMunsell,
-    marginBottom: '1rem',
   },
 };
 

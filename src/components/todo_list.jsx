@@ -28,6 +28,7 @@ const TodoList = (props) => {
     <ListGroup
       className="todo-list stack-large stack-exception"
       aria-labelledby="list-heading"
+      style={styles.listContainer}
     >
       {Object.keys(taskData).length ? taskList : emptyState() }
     </ListGroup>
@@ -35,6 +36,10 @@ const TodoList = (props) => {
 }
 
 const styles = {
+  listContainer: {
+    display: 'flex',
+  },
+
   emptyStateContainer: {
     border: '1px solid',
     padding: '5rem 10rem',

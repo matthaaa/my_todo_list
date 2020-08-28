@@ -46,18 +46,6 @@ const styles = {
     borderRadius: '.25rem',
     backgroundColor: Colors.mintCream,
   },
-
-  formGroup: {
-    display: 'flex',
-    flexDirection: 'column',
-    fontFamily: 'Open Sans',
-    fontStyle: 'bold',
-  },
-
-  datePicker: {
-    border: '1px solid #ced4da',
-    borderRadius: '.25rem',
-  },
   
   closeButton: {
     marginRight: '.5rem',
