@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { Colors } from '../colors.js';
 import TaskForm from './task_form.jsx';
 
 import "react-datepicker/dist/react-datepicker.css";
