@@ -65,9 +65,8 @@ const App = props => {
     }
   };
 
-  const handleFilter = (filter) => {
-    // TODO: Implement filters; this will be passed into Filter Button component.
-  }
+  // TODO: Implement filters; this will be passed into Filter Button component.
+  // const handleFilter = (filter) => {}
 
   const completedTasks = tasks.filter(task => task.isCompleted);
   const overdueTasks = tasks.filter(task => pastDue(task));
