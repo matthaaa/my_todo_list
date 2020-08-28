@@ -17,7 +17,7 @@ const App = props => {
   const [tasks, setTasks] = useState(taskData);
   const [showAddModal, setShowAddModal] = useState(false);
 
-  const tasksFormattedNoun = numberOfTasks => numberOfTasks !== 1 ? 'tasks' : 'task';
+  const tasksFormattedNoun = numberOfTasks => numberOfTasks !== 1 ? 'Tasks' : 'Task';
 
   const updateTasks = tasks => {
     setTasks(tasks)
@@ -78,20 +78,7 @@ const App = props => {
   const overdueTasks = tasks.filter(task => pastDue(task));
   const dueTodayTasks = tasks.filter(task => dueToday(task));
 
-  const taskStatus = (label, content) => {
-    return (
-      <div style={styles.taskTracker}>
-        <div style={styles.taskTrackerHeader}>
-          <h5>
-            {label}
-          </h5>
-        </div>
-        <div>
-          {content}
-        </div>
-      </div>
-    );
-  }
+  const pastDueCount = overdueTasks.length - dueTodayTasks.length;
 
   return (
     <div className="todoapp stack-large" style={styles.appContainer}>
@@ -103,21 +90,38 @@ const App = props => {
       <div style={styles.welcomeContainer}>
         <div style={styles.welcomeContent}>
           <h1>Welcome!</h1>
-          <h4 id="list-heading">
-            {completedTasks.length} / {tasks.length} {tasksFormattedNoun(tasks.length)} completed.
-          </h4>
-          <h4 id="list-heading">
-            You have {dueTodayTasks.length} {tasksFormattedNoun(dueTodayTasks.length)} due today.
-          </h4>
-          <h4 id="list-heading">
-            {
-            /* 
-            * TODO: Currently overdue tasks also includes tasks due today;
-            * once this is fixed, revert this to just use overdueTasks
-            */
-            }
-            You have {overdueTasks.length - dueTodayTasks.length} {tasksFormattedNoun(overdueTasks.length - dueTodayTasks.length)} past due.
-          </h4>
+          <div style={styles.taskStats}>
+            <div style={styles.taskStat}>
+              <h5 style={styles.taskStatNumber}>
+                {completedTasks.length} / {tasks.length} 
+              </h5>
+              <h4 id="list-heading">
+                {tasksFormattedNoun(tasks.length)} completed
+              </h4>
+            </div>
+            <div style={styles.taskStat}>
+              <h5 style={styles.taskStatNumber}>
+                {dueTodayTasks.length} 
+              </h5>
+              <h4 id="list-heading">
+                {tasksFormattedNoun(dueTodayTasks.length)} due today
+              </h4>
+            </div>
+            <div style={styles.lastTaskStat}>
+              {
+                /* 
+                * TODO: Currently overdue tasks also includes tasks due today;
+                * once this is fixed, revert this to just use overdueTasks
+                */
+              }
+              <h5 style={{...styles.taskStatNumber, ...{color: pastDueCount > 0 ? Colors.middleRed : Colors.blueMunsell}}}>
+                {pastDueCount} 
+              </h5>
+              <h4 id="list-heading">
+                {tasksFormattedNoun(pastDueCount)} past due
+              </h4>
+            </div>
+          </div>
           <Button 
             onClick={() => setShowAddModal(true)}>
             Add task
@@ -154,7 +158,7 @@ const AddModal = (props) => {
 
 const styles = {
   appContainer: {
-    padding: '40px',
+    padding: '3rem',
     height: '100vh',
     backgroundColor: Colors.powderBlue,
   },
@@ -178,22 +182,44 @@ const styles = {
     color: Colors.spaceCadet,
     borderBottom: '1px solid',
     borderColor: Colors.blueMunsell,
-    marginBottom: '40px',
-    paddingBottom: '30px',
+    marginBottom: '3rem',
+    paddingBottom: '3rem',
     fontFamily: 'Open Sans',
     fontStyle: 'bold',
   },
   
   welcomeContent: {
-    padding: '5rem',
+    padding: '4rem',
     border: '1px solid',
     borderColor: Colors.blueMunsell,
     backgroundColor: Colors.mintCream,
     borderRadius: '.25rem',
   },
 
-  taskTracker: {
+  taskStats: {
+    display: 'flex',
+    margin: '2rem 0rem',
+    borderColor: Colors.blueMunsell,
+  },
 
+  taskStat: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    marginRight: '2rem',
+    paddingRight: '2rem',
+    borderRight: '1px solid',
+  },
+  
+  lastTaskStat: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  
+  taskStatNumber: {
+    color: Colors.blueMunsell,
+    fontSize: '4rem',
   },
 
   taskTrackerHeader: {
