@@ -2,7 +2,7 @@
   "name": "my_todo_list",
   "version": "0.1.0",
   "private": true,
-  "homepage" : "https://matthaaa.github.io/my_todo_list",
+  "homepage" : "https://matts-todo-list.netlify.app",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
