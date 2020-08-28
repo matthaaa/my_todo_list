@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import EditTaskForm from './edit_task_form.jsx';
 import { Colors } from '../colors.js';
+import { dueToday, pastDue } from '../task_helpers.js';
 
 const TodoListItem = (props) => {
   const {
@@ -13,7 +14,9 @@ const TodoListItem = (props) => {
   } = props;
   const taskId = task.id;
   const taskName = task.name;
-  const dueToday = task.dueDate === new Date().toDateString();
+
+  const isDueToday = dueToday(task);
+  const isPastDue = pastDue(task);
 
   const [showEditModal, setShowEditModal] = useState(false);
 
@@ -22,8 +25,28 @@ const TodoListItem = (props) => {
     setShowEditModal(false);
   }
 
+  const styleByDueDate = (componentStyle) => {
+    if (isDueToday) {
+      return {...componentStyle, ...styles.dueToday};
+    } else if (isPastDue) {
+      return {...componentStyle, ...styles.pastDue};
+    } else {
+      return componentStyle;
+    }
+  }
+
+  const dueLabel = () => {
+    if (isDueToday) {
+      return '(Due today)';
+    } else if (isPastDue) {
+      return '(Past due)';
+    } else {
+      return '';
+    }
+  };
+
   return (
-    <div style={styles.listItemContainer}>
+    <div style={styleByDueDate(styles.listItemContainer)}>
       <EditModal 
         show={showEditModal} 
         onHide={() => setShowEditModal(false)}
@@ -31,7 +54,7 @@ const TodoListItem = (props) => {
         task={task}
       />
       <div style={styles.listItemContent}>
-        <div style={dueToday ? styles.listItemHeaderDueToday : styles.listItemHeader}>
+        <div style={styleByDueDate(styles.listItemHeader)}>
           <input 
             id={taskId} 
             type="checkbox" 
@@ -41,7 +64,7 @@ const TodoListItem = (props) => {
           />
           <div style={styles.listItemHeaderContent}>
             <h5 className="todo-name" style={styles.headerText}>
-              {taskName} {dueToday ? '(Due today)' : ''}
+              {taskName} {dueLabel()}
             </h5>
             <div style={styles.actionButtons}>
               <Button 
@@ -64,7 +87,7 @@ const TodoListItem = (props) => {
               {task.description}
             </p>
           </div>
-          <div style={dueToday ? styles.dueTodayLabel : null}>
+          <div>
             <span>Due: </span>
             <span className="todo-due-date">
               {task.dueDate}
@@ -78,10 +101,11 @@ const TodoListItem = (props) => {
 
 const EditModal = (props) => {
   const { show, onHide, onSave, task } = props;
+  const { modalHeader } = styles.modal;
   return (
     <>
       <Modal show={show} onHide={onHide}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton style={modalHeader}>
           <Modal.Title>Edit task</Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -93,13 +117,30 @@ const EditModal = (props) => {
 }
 
 const styles = {
+  modal: {
+    modalHeader: {
+      color: 'white',
+      fontFamily: 'Open Sans',
+      backgroundColor: Colors.blueMunsell,
+    },
+  },
+
   listItemContainer: {
     border: '1px solid',
     borderColor: Colors.blueMunsell,
-    borderRadius: '5px',
+    borderRadius: '.25rem',
     fontFamily: 'Open Sans',
     fontStyle: 'bold',
     marginBottom: '10px',
+  },
+
+  pastDue: {
+    borderColor: Colors.middleRed,
+    backgroundColor: Colors.middleRed,
+  },
+
+  dueToday: {
+    borderColor: Colors.middleRed,
   },
 
   listItemContent: {
@@ -113,20 +154,8 @@ const styles = {
     padding: '10px',
     borderBottom: '1px solid',
     borderColor: Colors.blueMunsell,
-    borderRadius: '5px 5px 0px 0px',
     backgroundColor: Colors.blueMunsell,
     color: 'white',
-  },
-
-  listItemHeaderDueToday: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: '10px',
-    borderBottom: '1px solid',
-    borderColor: Colors.maizeCrayola,
-    borderRadius: '5px 5px 0px 0px',
-    color: Colors.spaceCadet,
-    backgroundColor: Colors.maizeCrayola,
   },
 
   headerText: {
@@ -158,7 +187,7 @@ const styles = {
   listItemBody: {
     backgroundColor: Colors.mintCream,
     padding: '10px',
-    borderRadius: '0px 0px 5px 5px',
+    borderRadius: '0rem 0rem .25rem .25rem',
   },
 
   taskBodyLabel: {
@@ -166,10 +195,6 @@ const styles = {
     borderBottom: '1px solid',
     borderColor: Colors.blueMunsell,
     marginBottom: '2px',
-  },
-
-  dueTodayLabel: {
-    backgroundColor: Colors.middleRed,
   },
 
   actionButtons: {

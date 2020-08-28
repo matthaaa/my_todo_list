@@ -5,9 +5,12 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 const TASK_DATA = [
-  { id: "todo-0", name: "Eat", isCompleted: true, description: '', dueDate: new Date().toDateString()},
-  { id: "todo-1", name: "Sleep", isCompleted: false, description: '', dueDate: new Date().toDateString()},
-  { id: "todo-2", name: "Repeat", isCompleted: false, description: '', dueDate: new Date().toDateString()},
+  { 
+    id: "todo-0", 
+    name: "Do something!", 
+    isCompleted: true, 
+    description: 'Your first task is to do something fun!', 
+    dueDate: new Date().toDateString()},
 ];
 
 ReactDOM.render(

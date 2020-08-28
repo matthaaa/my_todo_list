@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import './App.css';
 import TodoList from './components/todo_list.jsx';
-// import FilterButton from "./components/filter_button.jsx";
-import AddTaskForm from "./components/add_task_form.jsx";
+import AddTaskForm from './components/add_task_form.jsx';
+import FilterButton from './components/filter_button.jsx';
 import { nanoid } from "nanoid";
 import { Colors } from './colors.js';
+import { dueToday, pastDue } from './task_helpers.js';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = props => {
-  // const { taskData } = props;
   const storedTaskData = localStorage.getItem('tasks');
   const taskData = storedTaskData ? JSON.parse(storedTaskData) : props.taskData;
-  // debugger;
   const [tasks, setTasks] = useState(taskData);
-  const tasksFormattedNoun = tasks.length !== 1 ? 'tasks' : 'task';
+  const tasksFormattedNoun = tasks => tasks.length !== 1 ? 'tasks' : 'task';
 
   const updateTasks = tasks => {
     setTasks(tasks)
@@ -57,19 +56,48 @@ const App = props => {
     updateTasks(editedTaskList);
   }
 
+  const sortedTasks = (sortByAttribute) => {
+    switch(sortByAttribute) {
+      case 'dueDate':
+        return tasks.sort((task1, task2) => Date.parse(task1[sortByAttribute]) - Date.parse(task2[sortByAttribute]));
+      default:
+        // TODO: Create cases for additional sorting options.
+        return tasks;
+    }
+  };
+
+  const handleFilter = (filter) => {
+    // TODO: Implement filters.
+  }
+
   const completedTasks = tasks.filter(task => task.isCompleted);
-  console.log(tasks);
+  const overdueTasks = tasks.filter(task => pastDue(task));
+  const dueTodayTasks = tasks.filter(task => dueToday(task));
+
+  // debugger;
   return (
     <div className="todoapp stack-large" style={styles.appContainer}>
       <div style={styles.welcomeContent}>
         <h1>Welcome!</h1>
         <h4 id="list-heading">
-          You have {completedTasks.length} / {tasks.length} {tasksFormattedNoun} completed.
+          You have {completedTasks.length} / {tasks.length} {tasksFormattedNoun(tasks)} completed.
+        </h4>
+        <h4 id="list-heading">
+          You have {dueTodayTasks.length} {tasksFormattedNoun(dueTodayTasks)} due today.
+        </h4>
+        <h4 id="list-heading">
+          {
+          /* 
+           * TODO: Currently overdue tasks also includes tasks due today;
+           * once this is fixed, revert this to just use overdueTasks
+           */
+          }
+          You have {overdueTasks.length - dueTodayTasks.length} {tasksFormattedNoun(overdueTasks - dueTodayTasks)} past due.
         </h4>
       </div>
       <div style={styles.appContent}>
         <TodoList 
-          taskData={tasks}
+          taskData={sortedTasks('dueDate')}
           toggleCompleted={toggleCompleted}
           editTask={editTask}
           deleteTask={deleteTask}

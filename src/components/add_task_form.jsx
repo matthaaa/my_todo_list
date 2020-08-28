@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import DatePicker from "react-datepicker";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { Colors } from '../colors.js';
+import TaskForm from './task_form.jsx';
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -28,37 +30,10 @@ const AddTaskForm = (props) => {
 
   return (
     <Form style={styles.formContainer} onSubmit={handleSubmit}>
-      <Form.Group controlId="formTaskName" style={styles.formGroup}>
-        <Form.Label>Task name</Form.Label>
-        <Form.Control
-          type="text"
-          value={updatedTask.name}
-          onChange={e => handleUpdateTaskInput('name', e.target.value)}
-          name="text"
-          autoComplete="off"
-        />
-      </Form.Group>
-      <Form.Group controlId="formTaskDescription" style={styles.formGroup}>
-        <Form.Label>
-          Description
-        </Form.Label>
-        <Form.Control
-          type="text"
-          value={updatedTask.description}
-          onChange={e => handleUpdateTaskInput('description', e.target.value)}
-          name="text"
-          autoComplete="off"
-        />
-      </Form.Group>
-      <Form.Group controlId="formTaskDueDate" style={styles.formGroup}>
-        <Form.Label>
-          Due date
-        </Form.Label>
-        <DatePicker
-          selected={Date.parse(updatedTask.dueDate)}
-          onChange={date => handleUpdateTaskInput('dueDate', date)}
-        />
-      </Form.Group>
+      <div style={styles.formHeader}>
+        <h4>New task</h4>
+      </div>
+      <TaskForm formTask={updatedTask} onUpdateTask={handleUpdateTaskInput} />
       <Button variant="primary" type="submit" className="btn btn__primary btn__lg">
         {'Add task'}
       </Button>
@@ -76,13 +51,17 @@ const styles = {
   formContainer: {
     marginLeft: `20px`,
     padding: '20px',
-    border: '1px solid blue',
-    borderRadius: '5px',
+    border: '1px solid',
+    borderRadius: '.25rem',
+    height: '25rem',
+    borderColor: Colors.blueMunsell,
+    backgroundColor: Colors.mintCream,
   },
 
-  formGroup: {
-    fontFamily: 'Open Sans',
-    fontStyle: 'bold',
+  formHeader: {
+    borderBottom: '1px solid',
+    borderColor: Colors.blueMunsell,
+    marginBottom: '1rem',
   },
 };
 
