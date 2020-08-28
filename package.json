@@ -2,12 +2,13 @@
   "name": "my_todo_list",
   "version": "0.1.0",
   "private": true,
-  "homepage" : "https://matts-todo-list.netlify.app",
+  "homepage" : "https://matthaaa.github.io/my_todo_list",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "bootstrap": "^4.5.2",
+    "gh-pages": "^3.1.0",
     "nanoid": "^3.1.12",
     "react": "^16.13.1",
     "react-bootstrap": "^1.3.0",
@@ -20,7 +21,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "yarn build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
