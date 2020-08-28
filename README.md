@@ -16,7 +16,11 @@ This was created as a speed run, with an emphasis on rapid delivery rather than 
 
 ### Main Features
 
-- Add, edit, and delete todo lists
+- Add, edit, and delete todo lists, with the following attributes:
+    - Name
+    - Description
+    - Completed Status
+    - Due Date
 - Basic report of tasks to be done and tasks that are due/overdue
 - Ability to mark tasks as complete and gray them out
 - Data persists on client using localStorage so that user can close their browser and still have their tasks loaded when they return to the page
@@ -53,3 +57,4 @@ This was created as a speed run, with an emphasis on rapid delivery rather than 
 
 - Creating generic components: currently there are custom styles added to the existing Bootstrap components used. By coupling the components with the corresponding custom styles, the component can simply be imported and used instead of re-styled each place it is used.
 - Adding a styles.js helper so that repeated styles can simple be referenced. This problem can also be solved or used in tandem with the generic components file above
+- A constants file that will contain objects as a source of truth in regards to filter variables, sorting names, etc. Having these variables in one place will mitigate the risk of typos and mislabelings as the app is built out.
