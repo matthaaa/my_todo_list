@@ -30,6 +30,11 @@ This was created as a speed run, with an emphasis on rapid delivery rather than 
 
 - Filtering tasks by specific attributes
 - Custom Sorting (by name, description, etc.)
+- Categories for tasks
+- Search functionality
+- A "Due today" section
+- Calendar view of due dates
+- Text alerts for upcoming due dates
 
 ### Optimizations and Implementation Details
 
@@ -53,7 +58,7 @@ This was created as a speed run, with an emphasis on rapid delivery rather than 
 
 - Using rem instead of px for accessibility purposes. This is also an ongoing refactor.
 
-#### Future Optimizations:
+### Future Optimizations:
 
 - Creating generic components: currently there are custom styles added to the existing Bootstrap components used. By coupling the components with the corresponding custom styles, the component can simply be imported and used instead of re-styled each place it is used.
 - Adding a styles.js helper so that repeated styles can simple be referenced. This problem can also be solved or used in tandem with the generic components file above
