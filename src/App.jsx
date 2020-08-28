@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import './App.css';
 import TodoList from './components/todo_list.jsx';
 import AddTaskForm from './components/add_task_form.jsx';
-import FilterButton from './components/filter_button.jsx';
 import { nanoid } from "nanoid";
 import { Colors } from './colors.js';
 import { dueToday, pastDue } from './task_helpers.js';
@@ -67,14 +66,13 @@ const App = props => {
   };
 
   const handleFilter = (filter) => {
-    // TODO: Implement filters.
+    // TODO: Implement filters; this will be passed into Filter Button component.
   }
 
   const completedTasks = tasks.filter(task => task.isCompleted);
   const overdueTasks = tasks.filter(task => pastDue(task));
   const dueTodayTasks = tasks.filter(task => dueToday(task));
 
-  // debugger;
   return (
     <div className="todoapp stack-large" style={styles.appContainer}>
       <div style={styles.welcomeContent}>

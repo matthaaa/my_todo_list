@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
 
-import DatePicker from "react-datepicker";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Colors } from '../colors.js';
@@ -9,7 +8,6 @@ import TaskForm from './task_form.jsx';
 
 import "react-datepicker/dist/react-datepicker.css";
 
-// TODO: Use the imported `task` such that this form can be both edit and create form
 const AddTaskForm = (props) => {
   const { onSubmit } = props;
   const blankTask = { name: '', description: '', dueDate: new Date().toDateString() };
@@ -42,8 +40,6 @@ const AddTaskForm = (props) => {
 }
 
 AddTaskForm.propTypes = {
-  // TODO: Add task as a prop to determined add or edit functionality
-  // task: PropTypes.object.isRequired,
   onSubmit: PropTypes.func.isRequired,
 }
 

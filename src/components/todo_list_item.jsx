@@ -35,6 +35,10 @@ const TodoListItem = (props) => {
     }
   }
 
+  const styleByCompleted = (componentStyle) => (
+    task.isCompleted ? {...componentStyle, ...styles.isCompleted} : componentStyle
+  );
+
   const dueLabel = () => {
     if (isDueToday) {
       return '(Due today)';
@@ -53,7 +57,7 @@ const TodoListItem = (props) => {
         onSave={task => handleSave(task)}
         task={task}
       />
-      <div style={styles.listItemContent}>
+      <div style={styleByCompleted(styles.listItemContent)}>
         <div style={styleByDueDate(styles.listItemHeader)}>
           <input 
             id={taskId} 
@@ -116,6 +120,7 @@ const EditModal = (props) => {
   );
 }
 
+// TODO: Refactpr styles; add commonly used styles to generic Styles.js file.
 const styles = {
   modal: {
     modalHeader: {
@@ -141,6 +146,10 @@ const styles = {
 
   dueToday: {
     borderColor: Colors.middleRed,
+  },
+
+  isCompleted: {
+    opacity: '0.6',
   },
 
   listItemContent: {
