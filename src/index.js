@@ -10,7 +10,8 @@ const TASK_DATA = [
     name: "Do something!", 
     isCompleted: true, 
     description: 'Your first task is to do something fun!', 
-    dueDate: new Date().toDateString()},
+    dueDate: new Date().toDateString(),
+  },
 ];
 
 ReactDOM.render(
