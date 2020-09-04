@@ -2,12 +2,12 @@ import React from "react";
 import Button from 'react-bootstrap/Button';
 
 // TODO(WIP): Finish and add to all locations where buttons are.
-const Button = (props) => {
+const CustomButton = (props) => {
   const {
     label,
     onClick,
     style
-  } = this.props;
+  } = props;
 
   return (
     <Button 
@@ -18,4 +18,4 @@ const Button = (props) => {
   );   
 };
 
-export default Button;
+export default CustomButton;

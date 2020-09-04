@@ -5,7 +5,7 @@ import { AddTaskModal } from './components/task_action_modals.jsx';
 import { nanoid } from "nanoid";
 import { Colors } from './colors.js';
 import { dueToday, pastDue } from './task_helpers.js';
-import Button from 'react-bootstrap/Button';
+import CustomButton from './components/generic/button';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -121,10 +121,10 @@ const App = props => {
               </p>
             </div>
           </div>
-          <Button 
-            onClick={() => setShowAddModal(true)}>
-            Add task
-          </Button>
+          <CustomButton 
+            onClick={() => setShowAddModal(true)}
+            label={'Add task'}
+          />
         </div>
       </div>
       <div style={styles.appContent}>
