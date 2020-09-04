@@ -1,7 +1,5 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/1496ddd4-305e-485c-9066-2f8f7fc3e7e6/deploy-status)](https://app.netlify.com/sites/matts-todo-list/deploys)
-
 
 ## Matt's todo list!
 
