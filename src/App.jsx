@@ -5,7 +5,7 @@ import { AddTaskModal } from './components/task_action_modals.jsx';
 import { nanoid } from "nanoid";
 import { Colors } from './colors.js';
 import { dueToday, pastDue } from './task_helpers.js';
-import CustomButton from './components/generic/button';
+import CustomButton from './components/generic/custom_button.jsx';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 

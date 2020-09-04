@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PropTypes from 'prop-types';
 
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import CustomButton from './generic/custom_button.jsx';
 import { Colors } from '../colors.js';
 import TaskForm from './task_form.jsx';
 
@@ -26,12 +26,16 @@ const EditTaskForm = (props) => {
   return (
     <Form style={styles.formContainer}>
       <TaskForm formTask={updatedTask} onUpdateTask={handleUpdateTaskInput}/>
-      <Button variant="outline-primary" onClick={onHide} style={styles.closeButton}>
-        Close
-      </Button>
-      <Button variant="primary" onClick={updatedTask => handleSubmit(updatedTask)}>
-        Save
-      </Button>
+      <CustomButton 
+        hasOutlineStyle
+        label={'Close'}
+        onClick={onHide} 
+        style={styles.closeButton}
+      />
+      <CustomButton 
+        label={'Save'}
+        onClick={updatedTask => handleSubmit(updatedTask)}
+      />
     </Form>
   );
 }
